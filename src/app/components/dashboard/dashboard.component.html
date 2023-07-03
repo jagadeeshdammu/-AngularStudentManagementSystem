@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Student Management System</a>
+          <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <button class="btn btn-outline-success" type="button" [routerLink]="'/add'">Add Student</button>
+          </div> 
+        </div>
+    </nav>
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Student ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Class</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of studentList; let i = index">
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.age}}</td>
+            <td>{{student.class}}</td>
+            <td>
+              <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#editStudent" (click)="editStudent(student)">Edit</button>
+              <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delteModel" (click)="deleteItem(i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+  <!--Edit Student Modal -->
+  <div class="modal fade" id="editStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Student Detailes</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="studentDetails">
+            <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">ID</label>
+            <input type="number" formControlName="id" class="form-control" id="id" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Age</label>
+                <input type="number" formControlName="age" class="form-control" id="age" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Class</label>
+                <input type="text" formControlName="class" class="form-control" id="class" aria-describedby="emailHelp">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="updateStudent()">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="delteModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> 
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Are you really want to delete?</h1>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="deleteItemConfirem()">Yes</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
